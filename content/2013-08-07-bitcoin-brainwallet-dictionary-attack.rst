@@ -2,7 +2,7 @@ Dictionary Attack on Bitcoin Brainwallets
 #########################################
 
 :date: 2013-08-08 21:00
-:tags: bitcoin,bruteforce,script,python
+:tags: bitcoin,bruteforce,script,python,dictionary
 :category: Project
 :author: Dan
 
@@ -13,8 +13,8 @@ I was able to borrow the bitcoin address generation code_ and had initially plan
 It was then just a matter of finding a simple dictionary_ file and writing a script to:
 
 - Convert a word into public/private bitcoin addresses
-- Check with local Abe server using HTTP request to see if any bitcoins had ever been received to this public address. 
-- Print output and save to file any addresses that had transactions take place.
+- Check with local Abe server using HTTP request to see if any bitcoins had ever been received by this public address. 
+- Save to file any addresses that have had transactions take place.
 
 You can find the script on Github_.
 
