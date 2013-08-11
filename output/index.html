@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>/dev/null</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="https://www.vittegleo.com/theme/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://www.vittegleo.com/theme/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://www.vittegleo.com/theme/css/bootstrap-responsive.min.css">
+
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:700|Istok+Web' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="https://www.vittegleo.com/theme/css/main.css">
+
+        <link rel="stylesheet" href="https://www.vittegleo.com/theme/css/style.css">
+
+        <script src="https://www.vittegleo.com/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span2">
+                    <aside>
+                        <header id="blog-title">
+                            <a class="brand" href="https://www.vittegleo.com">/dev/null</a>
+                        </header>
+                        <nav id="blog-nav">
+                                                        <ul class="nav nav-list" align="center">
+                                                            </ul>
+                                                                                    <ul class="nav nav-list" align="center">
+                                <li class="nav-header">Social</li>
+                                                                <li><a href="https://github.com/dan-v"><i class="icon-github" style="color: #1f334b"></i>github</a></li>
+                                                                <li><a href="https://www.linkedin.com/in/danvittegleo"><i class="icon-linkedin" style="color: #1f334b"></i>linkedin</a></li>
+                                                            </ul>
+                                                                                    <ul class="nav nav-list" align="center">
+                                <li class="nav-header">Site</li>
+                                <li><a href="https://www.vittegleo.com"><i class="icon-home"></i>home</a></li>
+                                <li><a href="https://www.vittegleo.com/archives.html"><i class="icon-list"></i>archives</a></li>
+                                <li><a href="https://www.vittegleo.com/categories.html"><i class="icon-sitemap"></i>categories</a></li>
+                                <li><a href="https://www.vittegleo.com/tags.html"><i class="icon-tags"></i>tags</a></li>
+                            </ul>
+                            <ul class="nav nav-list" align="center">
+                                <li class="nav-header">Feeds</li>
+                                                                <li><a href="https://www.vittegleo.com/feeds/all.rss.xml" rel="alternate"><i class="icon-rss"></i>rss feed</a></li>
+                                                                <li><a href="https://www.vittegleo.com/feeds/all.atom.xml" rel="alternate"><i class="icon-rss" ></i>atom feed</a></li>
+                            </ul>
+                        </nav>
+                    </aside>
+                </div>
+                <div class="span10">
+                    <section id="blog-content">
+                        
+
+
+
+<article>
+    <section id="post_title">
+        <h1><time>Thu 08 August 2013</time></h1>
+    </section>
+    <div id="post_content">
+    <section>
+        <div class="row-fluid">
+            <div class="span9" id="post_article">
+                <header>
+                    <h1><a href="https://www.vittegleo.com/dictionary-attack-on-bitcoin-brainwallets.html">Dictionary Attack on Bitcoin Brainwallets</a></h1>
+                </header>
+                <p>I wanted to create a simple program that would take a dictionary word, convert it into a bitcoin address, and then check to see if any bitcoin transactions had ever taken place with this address. I was curious to see how many insecure brainwallets existed.</p>
+<p>I was able to borrow the bitcoin address generation <a class="reference external" href="https://github.com/weex/addrgen/blob/master/addrgen.py">code</a> and had initially planned to point it at <a class="reference external" href="http://blockexplorer.com/">blockexplorer.com</a> but then realized that this would probably end up flooding the site with traffic. It also appeared to be possible to get address information from a local bitcoin server (using JSON-RPC), but it was fairly slow. I then moved on to setting up a blockexplorer of my own called <a class="reference external" href="https://github.com/jtobey/bitcoin-abe">Abe</a>. After getting it up and running, it took over a week to insert all transactions into the database from the blockchain.</p>
+<p>It was then just a matter of finding a simple <a class="reference external" href="http://downloads.skullsecurity.org/passwords/english.txt.bz2">dictionary</a> file and writing a script to:</p>
+<ul class="simple">
+<li>Convert a word into public/private bitcoin addresses</li>
+<li>Check with local Abe server using HTTP request to see if any bitcoins had ever been received to this public address.</li>
+<li>Print output and save to file any addresses that had transactions take place.</li>
+</ul>
+<p>You can find the script on <a class="reference external" href="https://github.com/dan-v/bruteforce-bitcoin-brainwallet">Github</a>.</p>
+<p>Here are the addresses I found with this particular dictionary. Apparently this dictionary has duplicate words, so a little cleanup was required.</p>
+<div class="highlight"><pre>Word         Received Bitcoins  Public Address
+a            0.01               1HUBHMij46Hae75JPdWjeZ5Q7KaL7EFRSD
+cat          0.15               162TRPRZvdgLVNksMoMyGJsYBfYtB4Q8tM
+chicken      0.001              15Z16yvxv3oH6FBd83qkgo8AmzYcaSy2vX
+destruction  0.09               11p4664ndnKmiPBL6naW9nF9z91skDdkf
+dog          0.01               19MxhZPumMt9ntfszzCTPmWNQeh6j6QqP2
+hangzhou     0.2                1EaUxkWMQ1kGPh3gWLev3Uzb2MUEmP59ws
+love         0.012              1Mm6ouhpHqbtahCRNYfTo7Art1fbmk7PcR
+password     0.06108            16ga2uqnF1NqpAuQeeg7sTCAdtDUwDyJav
+poop         0.001              1LVL6qEhMQTbNtSBDfBkmzo5ZS1PwaKZWs
+root         0.001              148qEts4TkouGRwvUMRFM8dB9MjxM6iCuN
+sausage      0.01               1TnnhMEgic5g4ttrCQyDopwqTs4hheuNZ
+supper       0.002              16rAKW1gUqtQL8PaaYM2Drkitm686kgdEC
+swordfish    0.00144271         1PG9p4dG3vhZ8gx19aVdu5ZfECw9Q7N3B6
+test         0.0511876          1HKqKTMpBTZZ8H5zcqYEWYBaaWELrDEXeE
+very         0.0075             16NpdGeEeEebivqHGSXeDCjozr9yKHeZPD
+wang         0.0001             1AjzxqeicCxMYDSAW5xqk1is3KX8eipD82
+you          0.01               1NGj2UvhbC79ZXFBPBaXSmf7vwRy7cXK5R
+</pre></div>
+
+            </div>
+                    </div>
+    </section>
+    <section>
+        <aside id="post_share">
+            <div class="row-fluid">
+                <div class="span6">
+                                        <ul class="post_tags">
+                        <li><a href="https://www.vittegleo.com/tag/bitcoin.html">bitcoin</a></li><li><a href="https://www.vittegleo.com/tag/bruteforce.html">bruteforce</a></li><li><a href="https://www.vittegleo.com/tag/script.html">script</a></li><li><a href="https://www.vittegleo.com/tag/python.html">python</a></li>                    </ul>
+                                    </div>
+                <div class="span2">
+                    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="danvittegleo" data-related="danvittegleo" data-url="https://www.vittegleo.com/dictionary-attack-on-bitcoin-brainwallets.html" data-text="Dictionary Attack on Bitcoin Brainwallets">Tweet</a>
+                </div>
+                <div class="span1">
+                    <span class="g-plusone" data-href="https://www.vittegleo.com/dictionary-attack-on-bitcoin-brainwallets.html" data-size="medium"></span>
+                </div>
+                            </div>
+        </aside>
+    </section>
+</div></article>
+
+
+
+
+
+<article>
+    <div id="post_content">
+    <section>
+        <div class="row-fluid">
+            <div class="span9" id="post_article">
+                <header>
+                    <h1><a href="https://www.vittegleo.com/convert-vmdk-from-thin-to-eager-zero.html">Convert VMDK from Thin to Eager Zero</a></h1>
+                </header>
+                <p>This is one way to convert a thin provisioned VMDK into a thick provisioned eager zeroed VMDK. I was unable to mount a thin provisioned VMDK in read/write mode using vmware-mount.exe, so this is how I worked around it. You will need the VMware Virtual Disk Development Kit (<a class="reference external" href="https://communities.vmware.com/community/vmtn/developer/forums/vddk">VDDK</a>) to do this.</p>
+<ul class="simple">
+<li>After installing VDDK, open cmd.exe and use vmware-vdiskmanager to convert the VMDK.</li>
+</ul>
+<div class="highlight"><pre>cd c:\Program Files (x86)\VMware\VMware Virtual Disk Development Kit\bin
+vmware-vdiskmanager -r c:\thin_provisioned.vmdk -t 2 c:\thick_eager_zero.vmdk
+</pre></div>
+
+            </div>
+                    </div>
+    </section>
+    <section>
+        <aside id="post_share">
+            <div class="row-fluid">
+                <div class="span6">
+                                        <ul class="post_tags">
+                        <li><a href="https://www.vittegleo.com/tag/vmware.html">vmware</a></li><li><a href="https://www.vittegleo.com/tag/windows.html">windows</a></li><li><a href="https://www.vittegleo.com/tag/convert.html">convert</a></li><li><a href="https://www.vittegleo.com/tag/vmdk.html">vmdk</a></li>                    </ul>
+                                    </div>
+                <div class="span2">
+                    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="danvittegleo" data-related="danvittegleo" data-url="https://www.vittegleo.com/convert-vmdk-from-thin-to-eager-zero.html" data-text="Convert VMDK from Thin to Eager Zero">Tweet</a>
+                </div>
+                <div class="span1">
+                    <span class="g-plusone" data-href="https://www.vittegleo.com/convert-vmdk-from-thin-to-eager-zero.html" data-size="medium"></span>
+                </div>
+                            </div>
+        </aside>
+    </section>
+</div></article>
+
+
+
+
+
+<article>
+    <div id="post_content">
+    <section>
+        <div class="row-fluid">
+            <div class="span9" id="post_article">
+                <header>
+                    <h1><a href="https://www.vittegleo.com/custom-centos-live-cd.html">Custom CentOS Live CD</a></h1>
+                </header>
+                <p>This is a quick tutorial on creating a custom CentOS Live CD. This was done with CentOS 6.2.</p>
+<ul class="simple">
+<li>First step is to download the CentOS Live CD ISO.</li>
+</ul>
+<div class="highlight"><pre>mkdir /iso
+cd /iso
+wget &lt;url for centos live ISO&gt;
+</pre></div>
+<ul class="simple">
+<li>Mount CentOS ISO and copy the contents to temporary location.</li>
+</ul>
+<div class="highlight"><pre>mount CentOS-6.2-x86_64-LiveCD.iso mnt -o loop
+mkdir CentOS-6.2-x86_64-LiveCD
+cp -arp mnt/* CentOS-6.2-x86_64-LiveCD/
+umount mnt
+</pre></div>
+<ul class="simple">
+<li>Create a custom isolinux.cfg file. This menu will be displayed when booting the custom CentOS Live CD.</li>
+</ul>
+<div class="highlight"><pre><span class="c">##########</span>
+UI vesamenu.c32
+MENU TITLE Custom CentOS
+TIMEOUT 50
+
+DEFAULT centos
+LABEL centos
+KERNEL vmlinuz0
+APPEND <span class="nv">initrd</span><span class="o">=</span>initrd0.img <span class="nv">root</span><span class="o">=</span>live:CDLABEL<span class="o">=</span>CentOS-6.2-x86_64-LiveCD <span class="nv">rootfstype</span><span class="o">=</span>auto ro liveimg 3 quiet nodiskmount nolvmmount  rhgb <span class="nv">vga</span><span class="o">=</span>791 rd.luks<span class="o">=</span>0 rd.md<span class="o">=</span>0 rd.dm<span class="o">=</span>0 <span class="nv">selinux</span><span class="o">=</span>0
+<span class="c">##########</span>
+</pre></div>
+<ul class="simple">
+<li>Overwrite isolinux.cfg file in temporary location.</li>
+</ul>
+<div class="highlight"><pre>cp isolinux.cfg CentOS-6.2-x86_64-LiveCD/isolinux/
+</pre></div>
+<ul class="simple">
+<li>Mount squashfs and copy off all contents to temporary location. Mount ext3fs filesystem.</li>
+</ul>
+<div class="highlight"><pre>mount CentOS-6.2-x86_64-LiveCD/LiveOS/squashfs.img mnt -o loop -t squashfs
+mkdir squashfs
+cp -a mnt/* squashfs
+umount mnt
+mkdir ext3fs
+mount squashfs/LiveOS/ext3fs.img ext3fs -o loop
+</pre></div>
+<ul class="simple">
+<li>Edit file ext3fs/etc/rc.local to change boot settings for custom ISO. In this case configuring networking, creating a ramdisk, and presenting it over NFS.</li>
+</ul>
+<div class="highlight"><pre><span class="c">##########</span>
+touch /var/lock/subsys/local
+/sbin/ifconfig eth0 0.0.0.0
+/sbin/ifconfig eth0 up
+/sbin/ifconfig eth1 0.0.0.0
+/sbin/ifconfig eth1 up
+/sbin/vconfig add eth0 101
+/sbin/vconfig add eth1 101
+/sbin/ifconfig eth0.101 192.168.101.103 netmask 255.255.255.0
+/sbin/ifconfig eth1.101 192.168.101.104 netmask 255.255.255.0
+/sbin/ifconfig eth2 192.168.100.103 netmask 255.255.255.0 up
+/sbin/ifconfig eth3 192.168.100.104 netmask 255.255.255.0 up
+/bin/mkdir /ramdisk
+/bin/mount -o <span class="nv">size</span><span class="o">=</span>10G -t tmpfs tmpfs /ramdisk
+/bin/echo <span class="s1">&#39;/ramdisk *(rw,sync,insecure,fsid=1,all_squash,sync,no_wdelay)&#39;</span>&gt;/etc/exports
+/sbin/service nfs restart
+<span class="c">##########</span>
+</pre></div>
+<ul class="simple">
+<li>Chroot into mounted ext3fs filesystem and make any required modifications. In this case, updating root password, disabling firewall, and enabling sshd.</li>
+</ul>
+<div class="highlight"><pre>chroot /iso/ext3fs/
+passwd root passwd
+chkconfig NetworkManager off
+chkconfig iptables off
+chkconfig ip6tables off
+chkconfig sshd on
+<span class="nb">exit</span>
+</pre></div>
+<ul class="simple">
+<li>Regenerate squashfs and create new ISO (Custom-CentOS.iso).</li>
+</ul>
+<div class="highlight"><pre>rm /iso/CentOS-6.2-x86_64-LiveCD/LiveOS/squashfs.img
+mksquashfs /iso/squashfs /iso/CentOS-6.2-x86_64-LiveCD/LiveOS/squashfs.img
+mkisofs -o Custom-CentOS.iso <span class="se">\</span>
+      -J -r -hide-rr-moved -hide-joliet-trans-tbl -V CentOS-6.2-x86_64-LiveCD <span class="se">\</span>
+      -b isolinux/isolinux.bin -c isolinux/boot.cat <span class="se">\</span>
+      -no-emul-boot -boot-load-size 4 -boot-info-table <span class="se">\</span>
+      /iso/CentOS-6.2-x86_64-LiveCD
+</pre></div>
+
+            </div>
+                    </div>
+    </section>
+    <section>
+        <aside id="post_share">
+            <div class="row-fluid">
+                <div class="span6">
+                                        <ul class="post_tags">
+                        <li><a href="https://www.vittegleo.com/tag/centos.html">centos</a></li><li><a href="https://www.vittegleo.com/tag/linux.html">linux</a></li><li><a href="https://www.vittegleo.com/tag/livecd.html">livecd</a></li>                    </ul>
+                                    </div>
+                <div class="span2">
+                    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="danvittegleo" data-related="danvittegleo" data-url="https://www.vittegleo.com/custom-centos-live-cd.html" data-text="Custom CentOS Live CD">Tweet</a>
+                </div>
+                <div class="span1">
+                    <span class="g-plusone" data-href="https://www.vittegleo.com/custom-centos-live-cd.html" data-size="medium"></span>
+                </div>
+                            </div>
+        </aside>
+    </section>
+</div></article>
+
+<div class="pagination">
+<section>
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+
+    <li class="active"><a href="https://www.vittegleo.com/index.html">1</a></li>
+    <li class=""><a href="https://www.vittegleo.com/index2.html">2</a></li>
+
+    <li class="next"><a href="https://www.vittegleo.com/index2.html">Next &rarr;</a></li>
+</ul>
+</section>
+</div>
+
+
+
+                        <a href="#" class="go-top"><i class="icon-circle-arrow-up"></i></a>
+                    </section>
+                </div>
+            </div>
+            <footer id="blog-author">
+                Dan Vittegleo - Powered by <a href="https://github.com/getpelican/pelican">Pelican</a> - Built with <a href="http://html5boilerplate.com/"><span class="caps">HTML5</span> Boilerplate</a> and <a href="http://twitter.github.io/bootstrap/">Bootstrap</a> - Icons by <a href="http://fortawesome.github.io/Font-Awesome/">Font&nbsp;Awesome</a>
+            </footer>
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="https://www.vittegleo.com/theme/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+
+        <script src="https://www.vittegleo.com/theme/js/vendor/bootstrap.min.js"></script>
+
+        <script src="https://www.vittegleo.com/theme/js/plugins.js"></script>
+        <script src="https://www.vittegleo.com/theme/js/main.js"></script>
+
+        <script src="https://www.vittegleo.com/theme/js/back_to_top.js"></script>
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36570985-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+        <!-- Post sharing -->
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            <script type="text/javascript">
+  window.___gcfg = {lang: ''};
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+        
+    </body>
+</html>
