@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>/dev/null</title><link>https://www.vittegleo.com/</link><description></description><atom:link href="https://www.vittegleo.com/feeds/tips.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 03 Jan 2013 20:00:00 -0800</lastBuildDate><item><title>Convert VMDK from Thin to Eager Zero</title><link>https://www.vittegleo.com/convert-vmdk-from-thin-to-eager-zero.html</link><description>&lt;p&gt;This is one way to convert a thin provisioned VMDK into a thick provisioned eager zeroed VMDK. I was unable to mount a thin provisioned VMDK in read/write mode using vmware-mount.exe, so this is how I worked around it. You will need the VMware Virtual Disk Development Kit (&lt;a class="reference external" href="https://communities.vmware.com/community/vmtn/developer/forums/vddk"&gt;VDDK&lt;/a&gt;) to do this.&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;After installing VDDK, open cmd.exe and use vmware-vdiskmanager to convert the VMDK.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;cd c:\Program Files (x86)\VMware\VMware Virtual Disk Development Kit\bin
-vmware-vdiskmanager -r c:\thin_provisioned.vmdk -t 2 c:\thick_eager_zero.vmdk
-&lt;/pre&gt;&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Dan</dc:creator><pubDate>Thu, 03 Jan 2013 20:00:00 -0800</pubDate><guid>tag:https://www.vittegleo.com,2013-01-03:convert-vmdk-from-thin-to-eager-zero.html</guid><category>vmware</category><category>windows</category><category>convert</category><category>vmdk</category></item></channel></rss>
