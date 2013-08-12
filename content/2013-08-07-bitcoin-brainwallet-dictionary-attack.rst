@@ -24,7 +24,7 @@ You can find the script on Github_.
 .. _Github: https://github.com/dan-v/bruteforce-bitcoin-brainwallet
 .. _dictionary: http://downloads.skullsecurity.org/passwords/english.txt.bz2
 
-Here are the addresses I found with this particular dictionary. Apparently this dictionary has duplicate words, so a little cleanup was required.
+Here are the brainwallets I found with this particular dictionary. Note: Apparently this dictionary has duplicate words, so a little cleanup was required.
 
 .. code-block:: text
 
