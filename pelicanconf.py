@@ -25,7 +25,6 @@ DEFAULT_PAGINATION = 3
 #FEED_ALL_RSS = 'feeds/all.rss.xml'
 #CATEGORY_FEED_RSS = 'feeds/%s.rss.xml'
 
-FILES_TO_COPY = (('extra/favicon.ico', 'favicon.ico'),)
 JINJA_EXTENSIONS = ['jinja2.ext.do']
 
 DISQUS_SITENAME = "mydevnull"

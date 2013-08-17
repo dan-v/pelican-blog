@@ -45,6 +45,8 @@ html: clean $(OUTPUTDIR)/index.html
 
 $(OUTPUTDIR)/%.html:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
+	if [ -d $(BASEDIR)/extra ]; then cp $(BASEDIR)/extra/* $(OUTPUTDIR)/; fi
+	if [ -d $(BASEDIR)/images ]; then cp -r $(BASEDIR)/images $(OUTPUTDIR)/; fi
 
 clean:
 	[ ! -d $(OUTPUTDIR) ] || find $(OUTPUTDIR) -mindepth 1 -delete
