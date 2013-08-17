@@ -46,4 +46,4 @@ The TOR identity changing script (change_tor_identity.py_) in Python does the fo
 .. _phantomjs_vote.js: https://github.com/dan-v/automated-facebook-voting/blob/master/phantomjs_vote.js
 .. _change_tor_identity.py: https://github.com/dan-v/automated-facebook-voting/blob/master/change_tor_identity.py
 
-That is all.
+Happy voting.

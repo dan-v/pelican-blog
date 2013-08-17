@@ -6,9 +6,13 @@ Dictionary Attack on Bitcoin Brainwallets
 :category: Project
 :author: Dan
 
-I wanted to create a simple program that would take a dictionary word, convert it into a bitcoin address, and then check to see if any bitcoin transactions had ever taken place with this address. I was curious to see how many insecure brainwallets existed.
+For those who aren't familiar with a brainwallet, it is the concept of storing your bitcoins in a wallet that was created with a passphrase. It is generally a bad idea to use brainwallets especially with short passphrases as it is very easy to brute force attack. An example of an online brainwallet generator is brainwallet.org_.
 
-I was able to borrow the bitcoin address generation code_ and had initially planned to point it at blockexplorer.com_ but then realized that this would probably end up flooding the site with traffic. It also appeared to be possible to get address information from a local bitcoin server (using JSON-RPC), but it was fairly slow. I then moved on to setting up a blockexplorer of my own called Abe_. After getting it up and running, it took over a week to insert all transactions into the database from the blockchain.
+.. _brainwallet.org: http://brainwallet.org/
+
+I wanted to create a simple program that would take a dictionary word, convert it into a bitcoin address, and then check to see if any bitcoin transactions had ever taken place with this address. I was curious to see how many insecure brainwallets existed. 
+
+I was able to borrow the bitcoin address generation code_ and had initially planned to point it at blockexplorer.com_ but then realized that this would probably end up flooding the site with traffic. It also appeared to be possible to get address information from a local bitcoin server (using JSON-RPC), but it was fairly slow. I settled on to setting up a blockexplorer of my own called Abe_. After getting it up and running, it took over a week to insert all transactions into the database from the blockchain.
 
 It was then just a matter of finding a simple dictionary_ file and writing a script to:
 
@@ -24,7 +28,7 @@ You can find the script on Github_.
 .. _Github: https://github.com/dan-v/bruteforce-bitcoin-brainwallet
 .. _dictionary: http://downloads.skullsecurity.org/passwords/english.txt.bz2
 
-Here are the brainwallets I found with this particular dictionary. Note: Apparently this dictionary has duplicate words, so a little cleanup was required.
+Here are the brainwallets I found with this particular dictionary. Note: apparently this dictionary has duplicate words, so a little cleanup was required. 
 
 .. code-block:: text
 
