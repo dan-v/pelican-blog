@@ -11,7 +11,7 @@ TIMEZONE = 'America/Los_Angeles'
 DEFAULT_LANG = u'en'
 
 # Blogroll
-#LINKS =  (('Github', 'https://github.com/dan-v/'),)
+LINKS =  (('resume', 'resume.html'),)
 
 # Social widget
 SOCIAL = (('github', 'https://github.com/dan-v'),
@@ -25,6 +25,7 @@ DEFAULT_PAGINATION = 3
 #FEED_ALL_RSS = 'feeds/all.rss.xml'
 #CATEGORY_FEED_RSS = 'feeds/%s.rss.xml'
 
+DISPLAY_PAGES_ON_MENU  = False
 JINJA_EXTENSIONS = ['jinja2.ext.do']
 
 DISQUS_SITENAME = "mydevnull"
