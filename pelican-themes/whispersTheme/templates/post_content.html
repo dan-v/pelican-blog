@@ -1,0 +1,42 @@
+<div id="post_content">
+    <section>
+        <div class="row-fluid">
+            <div class="span10" id="post_article">
+                <header>
+                    <h1><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h1>
+                </header>
+                {{ article.content }}
+            </div>
+            {% if article.translations %}
+            <div class="span1 offset2 languages">
+                {% for translation in article.translations %}
+                <a class="translation" href="{{ SITEURL }}/{{ translation.url }}"><i class="icon-edit"></i>{{ translation.lang }}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    <section>
+        <aside id="post_share">
+            <div class="row-fluid">
+                <div class="span7">
+                    {% if article.tags %}
+                    <ul class="post_tags">
+                        {% for tag in article.tags %}<li><a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a></li>{% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                {% if SITEURL %}
+                {%- set share_url = [SITEURL, article.url]|join('/') -%}
+                {%- set share_title = article.title -%}
+                <div class="span1">
+                    {% include 'google_plusone.html' %}
+                </div>
+                <div class="span1">
+                    {% include 'twitter_link.html' %}
+                </div>
+                {% endif %}
+            </div>
+        </aside>
+    </section>
+</div>

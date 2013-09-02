@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<article>
+    <section id="post_title">
+        <h1 class="post_title"><time>{{ article.locale_date }}</time></h1>
+    </section>
+    {% include 'post_content.html' %}
+
+    <section id="post_nav">
+        <aside id="post_pager">
+            <div class="row-fluid">
+                <div class="span9">
+                {% set prevnext = [] %}
+                    {% for art in articles recursive %}
+                        {% if art == article %}
+                            {% if loop.first %}
+                                {% do prevnext.append(0) %}
+                                {% do prevnext.append(loop.index + 1) %}
+                            {% elif loop.last %}
+                                {% do prevnext.append(loop.index - 1) %}
+                                {% do prevnext.append(0) %}
+                            {% else %}
+                                {% do prevnext.append(loop.index - 1) %}
+                                {% do prevnext.append(loop.index + 1) %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    <ul class="pager">
+                    {% if prevnext[0] == 0 %}<li class="previous disabled"><a href="#">&larr; Newer</a></li>{% endif %}
+                    {% for art in articles recursive %}
+                        {% if loop.index == prevnext[0] %}<li class="previous"><a href="{{ SITEURL }}/{{ art.url }}">&larr; Newer</a></li>
+                        {% endif %}
+                        {% if loop.index == prevnext[1] %}<li class="next"><a href="{{ SITEURL }}/{{ art.url }}">Older &rarr;</a></li>
+                        {% endif %}
+                    {% endfor %}
+                        {% if prevnext[1] == 0 %}<li class="next disabled"><a href="#">Older &rarr;</a></li>{% endif %}
+                    </ul>
+                </div>
+            </div>
+        </aside>
+    </section>
+
+    {% include 'disqus.html' %}
+
+</article>
+
+{% endblock %}

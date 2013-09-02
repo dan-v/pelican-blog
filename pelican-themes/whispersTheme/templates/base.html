@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{% block windowtitle %}{{ SITENAME }}{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/bootstrap-responsive.min.css">
+
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:700|Istok+Web' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/main.css">
+
+        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css">
+
+        <script src="{{ SITEURL }}/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span2">
+                    <aside>
+                        <header id="blog-title">
+                            <a class="brand" href="{{ SITEURL }}">{{ SITENAME }}</a>
+                        </header>
+                        <nav id="blog-nav">
+                            {% if DISPLAY_PAGES_ON_MENU %}
+                            <ul class="nav nav-list" align="center">
+                                {% for page in PAGES %}
+                                <li><a href="{{ SITEURL }}/{{ page.url }}">{{ page.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <ul class="nav nav-list" align="center">
+                                <li class="nav-header">Site</li>
+                                <li><a href="{{ SITEURL }}"><i class="icon-home"></i>home</a></li>
+                                <li><a href="{{ SITEURL }}/archives.html"><i class="icon-list"></i>archives</a></li>
+                                <li><a href="{{ SITEURL }}/categories.html"><i class="icon-sitemap"></i>categories</a></li>
+                                <li><a href="{{ SITEURL }}/tags.html"><i class="icon-tags"></i>tags</a></li>
+                            </ul>
+                            {% if SOCIAL %}
+                            <ul class="nav nav-list" align="center">
+                                <li class="nav-header">Social</li>
+                                {% for name, link in SOCIAL %}
+                                <li><a href="{{ link }}"><i class="icon-{{ name }}" style="color: #1f334b"></i>{{ name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            {% if LINKS %}
+                            <ul class="nav nav-list" align="center">
+                                <li class="nav-header">Links</li>
+                                {% for name, link in LINKS %}
+                                <li><a href="{{ link }}"><i class="icon-share"></i>{{ name }}</a></li>
+                                {% endfor %}
+                            </ul>
+			    {% endif %}
+                            <ul class="nav nav-list" align="center">
+                                <li class="nav-header">Feeds</li>
+                                {% if FEED_ALL_RSS %}
+                                <li><a href="{{ SITEURL }}/{{ FEED_ALL_RSS }}" rel="alternate"><i class="icon-rss"></i>rss</a></li>
+                                {% endif %}
+                                <li><a href="{{ SITEURL }}/{{  FEED_ALL_ATOM }}" rel="alternate"><i class="icon-rss" ></i>atom</a></li>
+                            </ul>
+                        </nav>
+                    </aside>
+                </div>
+                <div class="span10">
+                    <section id="blog-content">
+                        {% block content %}{% endblock %}
+                        <a href="#" class="go-top"><i class="icon-circle-arrow-up"></i></a>
+                    </section>
+                </div>
+            </div>
+            <footer id="blog-author">
+                {{ AUTHOR }} - Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>
+            </footer>
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{{ SITEURL }}/theme/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+
+        <script src="{{ SITEURL }}/theme/js/vendor/bootstrap.min.js"></script>
+
+        <script src="{{ SITEURL }}/theme/js/plugins.js"></script>
+        <script src="{{ SITEURL }}/theme/js/main.js"></script>
+
+        <script src="{{ SITEURL }}/theme/js/back_to_top.js"></script>
+
+        <!-- Google Analytics -->
+        {% include "google_analytics.html" %}
+
+        <!-- Post sharing -->
+        {% if SITEURL %}
+            {% include 'twitter_link_script.html' %}
+            {% include 'google_plusone_script.html' %}
+        {% endif %}
+
+    </body>
+</html>

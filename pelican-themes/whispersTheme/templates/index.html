@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if articles %}
+
+{% for article in articles_page.object_list %}
+
+{% if loop.first and not articles_page.has_previous() %}
+
+<article>
+    <section id="post_title">
+        <h1><time>{{ article.locale_date }}</time></h1>
+    </section>
+    {% include 'post_content.html' %}
+</article>
+
+{% if loop.length == 1 %}
+{% include 'pagination.html' %}
+{% endif %}
+
+{% else %}
+
+<article>
+    {% include 'post_content.html' %}
+</article>
+
+{% if loop.last and (articles_page.has_previous() or not articles_page.has_previous() and loop.length > 1) %}
+{% include 'pagination.html' %}
+{% endif %}
+
+{% endif %}
+
+{% endfor %}
+
+{% endif %}
+
+{% endblock content %}

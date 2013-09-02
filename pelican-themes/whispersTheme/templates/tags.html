@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<article>
+    <section id="post_title">
+        <h1 class="post_title">Tags</h1>
+    </section>
+    <section id="post_content">
+        <div class="row-fluid">
+            <div class="span9">
+                {% for tag, articles in tags %}
+                <header>
+                    <h3 class="post_title"><a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a></h3>
+                </header>
+                <ul>
+                {% for article in articles %}
+                {% if not article.translation %}
+                    <li><a href="{{ SITEURL }}/{{ article.url }}" style="color: #000001">{{ article.title }}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</article>
+
+{% endblock %}

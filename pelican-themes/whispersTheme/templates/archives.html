@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<article>
+    <section id="post_title">
+        <h1 class="post_title">Archives</h1>
+    </section>
+    <section id="post_content">
+        <div class="row-fluid">
+            <div class="span9">
+                <table class="table table-striped">
+                    <tbody>
+                    {% for article in dates %}
+                        <tr>
+                        <td>{{ article.date.strftime("%Y %B, %d") }}</td>
+                        <td><a href="{{ SITEURL }}/{{ article.url }}" style="color: #000001">{{ article.title }}</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</article>
+
+
+
+{% endblock %}

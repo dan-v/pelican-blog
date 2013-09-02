@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<article>
+    <section id="post_title">
+        <h1 class="post_title">Categories</h1>
+    </section>
+    <section id="post_content">
+        <div class="row-fluid">
+            <div class="span9">
+                {% for category, articles in categories %}
+                <header>
+                    <h3 class="post_title"><a href="{{ SITEURL }}/{{ category.url }}">{{ category }}</a></h3>
+                </header>
+                <ul>
+                {% for article in articles %}
+                    <li><a href="{{ SITEURL }}/{{ article.url }}" style="color: #000001">{{ article.title }}</a></li>
+                {% endfor %}
+            </ul>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</article>
+
+{% endblock %}
