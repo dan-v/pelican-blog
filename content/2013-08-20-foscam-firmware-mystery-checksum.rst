@@ -28,7 +28,7 @@ When unpacked, the system firmware consists of two files:
 
 	dan@ubuntu:~/lr_cmos_11_37_2_51.bin_extracted$ binwalk linux.bin 
 	DECIMAL   	HEX       	DESCRIPTION
-	-------------------------------------------------------------------------------------------------------------------
+	-----------------------------------------------------------------------------
 	0         	0x0       	Zip archive data, at least v2.0 to extract, compressed size: 763912,  uncompressed size: 1539496, name: "linux.bin"  
 	764042    	0xBA88A   	End of Zip archive
 
@@ -75,7 +75,7 @@ When unpacked, the system firmware consists of two files:
 	-rwxr-xr-x 1 root root  48520 Dec 31  1969 wetctl
 	-rwxr-xr-x 1 root root  96327 Dec 31  1969 wpa_supplicant
 
-The core CGI scripts ended up being located in the camera blob which needs to be decompressed. uClinux uses a Binary Flat format known as BFLT. To decompress this I used a tool called flthdr. I was able to use strings on the decompressed file to search through the camera binary. The CGI files were found, but I had no way of seeing the actual contents or modifying them without some form of decompiler.
+The core CGI scripts ended up being located in the camera blob which needs to be decompressed. uClinux uses a binary flat format known as BFLT. To decompress this I used a tool called flthdr. I was able to use strings on the decompressed file to search through the camera binary. The CGI files were found, but I had no way of seeing the actual contents or modifying them without some form of decompiler.
 
 I really just wanted to see if I could inject my own CGI script into the firmware. My next idea was to inject it somewhere in the init script in the rootfs image.
 
@@ -112,4 +112,4 @@ Printing out the hex value in plaintext revealed what looked to be a checksum. I
 	242e2788aa32aefb3b68b9988cc97159  lr_cmos_11_37_2_51.bin
 	242e2788aa32aefb3b68b9988cc97159  lr_cmos_11_37_2_51.bin_custom
 
-The remaining mystery is this checksum? I originally tried to md5sum everything but then learned md5sum is a 16 byte value. I then moved onto CRC checks. So far no luck. Without being able to generate this checksum at the end of the firmware file it isn't possible to make a custom core firmware image that will be accepted by the camera.
+The remaining mystery is this checksum? So far I've had no luck chasing it down. Without being able to generate this checksum at the end of the firmware file it isn't possible to make a custom firmware image that will be accepted by the camera.
