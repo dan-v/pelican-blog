@@ -6,6 +6,10 @@ Mystery In Latest Foscam Firmware
 :category: Project
 :author: Dan
 
+Update: This has been solved_ by someone else by running the camera binary and executing the checksum code in gdb to get the checksum value.
+
+.. _solved: http://justreadthecode.wordpress.com/2013/10/04/ipcamera-fun-part-2/
+
 While attempting to build my own custom core firmware for my Foscam 8910W, I ran into a mysterious checksum of some sort that gets appended to the end of the firmware file. I see this only in the latest firmware lr_cmos_11_37_2_51.bin and not in the previous version lr_cmos_11_37_2_49.bin.
 
 The foscam_pkmgr shell script_ is able to unpack and repackage the system firmware file. The first step is to grab the latest Foscam core firmware and then use foscam_pkgmr to unpack it.
